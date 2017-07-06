@@ -10,7 +10,8 @@
     "mobx-react": "^4.2.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "socket.io-client": "^2.0.3"
+    "socket.io-client": "^2.0.3",
+    "strophe": "^1.2.4"
   },
   "devDependencies": {
     "autoprefixer": "7.1.0",
