@@ -11,6 +11,7 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "socket.io-client": "^2.0.3",
+    "stanza.io": "^8.4.1",
     "strophe": "^1.2.4"
   },
   "devDependencies": {

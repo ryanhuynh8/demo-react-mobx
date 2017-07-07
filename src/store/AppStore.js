@@ -1,5 +1,6 @@
 import {observable} from 'mobx'
 import axios from 'axios';
+import * as XMPP from 'stanza.io';
 
 var Strophe = window.Strophe;
 
@@ -13,8 +14,8 @@ class AppStore {
     constructor() {
         this.webSocket = new WebSocket('wss://echo.websocket.org/');
         this.webSocket.onmessage = e => this.receiveMessage(e);
-        this.connection = new Strophe.Connection(this.url);
-        this.connection.connect('huyhda@blah.im', '123', this.onConnect.bind(this));
+        this.connection = new Strophe.Connection(this.url, { keepalive: true });
+        this.connection.connect('huyhda@jabber.hot-chilli.net', '123456', this.onConnect.bind(this));
         this.connection.rawOutput = data => console.log('Received: ' + data);
         this.connection.rawInput = data => console.log('Sent: ' + data);
         console.log('Initializing connection...');
@@ -37,7 +38,7 @@ class AppStore {
             console.log('Strophe is connected.');
             var elementShow = window.Strophe.xmlElement('show', {}, 'chat');
             var elementStatus = window.Strophe.xmlElement('status', {}, 'Hello, I\'m from ReactJS');
-            var presence = window.$pres({from: 'huyhda@blah.im', xmlns: 'jabber:client', 'xmlns:stream': 'http://etherx.jabber.org/streams', version: '1.0'})
+            var presence = window.$pres({from: 'huyhda@jabber.hot-chilli.net', xmlns: 'jabber:client', 'xmlns:stream': 'http://etherx.jabber.org/streams', version: '1.0'})
                 .cnode(elementShow).up()
                 .cnode(elementStatus);
             this.connection.send(presence.tree());
@@ -69,7 +70,9 @@ class AppStore {
             message = { text: messageInfo.text, from: messageInfo.from, for: messageInfo.for };
         else {
             message = { text: this.message, from: messageInfo.from, for: messageInfo.for };
-            this.webSocket.send(this.message);
+            var msg = window.$msg({to: 'huyhuynh@jabber.hot-chilli.net', from: 'huyhda@jabber.hot-chilli.net', type: 'chat'})
+                .c('body', null, this.message);
+            this.connection.send(msg.tree());
         }
 
         this.messages.push(message);

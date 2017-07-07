@@ -45,8 +45,17 @@ class ChatWindow extends Component {
         }
     }
 
+    componentDidUpdate() {
+        const panel = findDOMNode(this.panelBodyRef);
+        if (panel !== null) {
+            panel.scrollTop = panel.scrollHeight;
+        }
+    }
+
     render() {
         var messages = this.messages.filter( item => item.for === this.props.user );
+
+
         return (
             <div className="row chat-window col-xs-5 col-md-3" id="chat_window_1"
                  style={{"margin-left": "10px"}}>
