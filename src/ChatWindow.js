@@ -19,7 +19,7 @@ class ChatWindow extends Component {
 
     submitMessage() {
         this.store.addMessage({ from: 'we', for: this.props.user });
-        // this.store.updateMessage('');
+        this.store.updateMessage('');
     }
 
     minimizeClick() {
@@ -34,6 +34,12 @@ class ChatWindow extends Component {
 
     onChangeMessage(event) {
         this.store.updateMessage(event.target.value);
+    }
+
+    onKeyPress(e) {
+        if (e.key === 'Enter') {
+            this.submitMessage();
+        }
     }
 
     setCustomer() {
@@ -82,8 +88,8 @@ class ChatWindow extends Component {
                     <div className="panel-footer">
                         <div className="input-group">
                             <input id="btn-input" type="text" className="form-control input-sm chat_input"
-                                   placeholder="Write your message here..."
-                                   onChange={e => this.onChangeMessage(e)} ref={ref => this.inputRef = ref}/>
+                                   placeholder="Write your message here..." value={this.store.message}
+                                   onChange={e => this.onChangeMessage(e)} onKeyPress={e => this.onKeyPress(e)} ref={ref => this.inputRef = ref}/>
                             <span className="input-group-btn">
                         <button className="btn btn-primary btn-sm" id="btn-chat" onClick={() => this.submitMessage()}>Send</button>
                         </span>

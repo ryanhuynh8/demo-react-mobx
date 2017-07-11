@@ -9,7 +9,7 @@ class AppStore {
     @observable message = '';
     @observable customer = {};
     url = 'https://conversejs.org/http-bind/';
-
+    senderId = null;
 
     constructor() {
         this.webSocket = new WebSocket('wss://echo.websocket.org/');
@@ -54,8 +54,9 @@ class AppStore {
 
         if (type == "chat" && elems.length > 0) {
             var body = elems[0];
-            var text  = Strophe.getText(body);
-            console.log(text);
+            var data  = JSON.parse(body.childNodes[0].nodeValue);
+            var text = data.msg;
+            this.senderId = data.sender_id;
             this.addMessage({text: text, from: 'they', for: 'Huy'});
         }
 
@@ -71,7 +72,7 @@ class AppStore {
         else {
             message = { text: this.message, from: messageInfo.from, for: messageInfo.for };
             var msg = window.$msg({to: 'huyhuynh@jabber.hot-chilli.net', from: 'huyhda@jabber.hot-chilli.net', type: 'chat'})
-                .c('body', null, this.message);
+                .c('body', null, JSON.stringify({ msg: this.message, to: this.senderId}));
             this.connection.send(msg.tree());
         }
 
@@ -91,14 +92,14 @@ class AppStore {
     }
 
     async loadCustomer(id) {
-        var result = await axios.get(`http://foobar123.getsandbox.com/user/${id}`);
+        var result = await axios.get(`https://foobar123.getsandbox.com/user/${id}`);
         this.customer = result.data;
         console.log(result);
     }
 
     loadCustomer(id) {
         var self = this;
-        axios.get(`http://foobar123.getsandbox.com/user/${id}`).then(customer => {
+        axios.get(`https://foobar123.getsandbox.com/user/${id}`).then(customer => {
             self.customer = customer.data;
         });
     }
