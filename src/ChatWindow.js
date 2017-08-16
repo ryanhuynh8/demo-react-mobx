@@ -2,12 +2,12 @@
  * Created by huyhuynh on 6/30/17.
  */
 import React, {Component} from 'react';
-import {observer} from 'mobx-react';
+import {observer, inject} from 'mobx-react';
 import $ from 'jquery';
 import { findDOMNode } from 'react-dom';
 import Message from './Message';
 
-@observer
+@inject('store') @observer
 class ChatWindow extends Component {
     constructor(props) {
         super(props);

@@ -2,11 +2,11 @@
  * Created by huyhuynh on 7/5/17.
  */
 import React, {Component} from 'react';
-import {observer} from 'mobx-react';
+import {observer, inject} from 'mobx-react';
 import $ from 'jquery';
 import { findDOMNode } from 'react-dom';
 
-@observer
+@inject('store') @observer
 class CustomerInfo extends Component {
     constructor(props) {
         super(props);
