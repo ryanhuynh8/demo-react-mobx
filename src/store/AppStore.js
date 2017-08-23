@@ -2,6 +2,33 @@ import {observable} from 'mobx'
 import axios from 'axios';
 var Strophe = window.Strophe;
 
+const cases = [
+    {
+        caseId: 80111,
+        source: '123CS',
+        status: 'pending',
+        date: 'April 30, 11:25 am (10 days ago)',
+        title: 'Lỗi thanh toán thẻ ATM',
+        content: 'Chào anh Huy bên em đã xử lý xong yêu cầu anh vui lòng kiểm tra xem vấn đề đã giải quyết xong chưa anh oi.'
+    },
+    {
+        caseId: 80222,
+        source: 'ZaloPay',
+        status: 'processing',
+        date: 'May 4, 9:15 am (6 days ago)',
+        title: 'Không thể đăng nhập bằng ZaloID',
+        content: 'Nhờ mọi người xử lý giùm vụ này sớm để còn đi chơi.'
+    },
+    {
+        caseId: 80333,
+        source: 'ZaloPay',
+        status: 'done',
+        date: 'May 4, 9:15 am (6 days ago)',
+        title: null,
+        content: null
+    }
+];
+
 class AppStore {
     @observable messages = [] ;
     @observable message = '';
@@ -18,6 +45,7 @@ class AppStore {
         // this.connection.rawOutput = data => console.log('Received: ' + data);
         // this.connection.rawInput = data => console.log('Sent: ' + data);
         console.log('Initializing connection...');
+        this.cases = cases;
     }
 
     onConnect(status)

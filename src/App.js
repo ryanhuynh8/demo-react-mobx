@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
-// import './App.css';
 import './style.css';
 import {observer, inject} from 'mobx-react';
-import ChatWindow from "./ChatWindow";
-import CustomerInfo from './CustomerInfo'
 import Header from './components/Header';
+import MainChatScreen from './components/MainChatScreen'
 
 @inject('store') @observer
 class App extends Component {
@@ -19,6 +17,9 @@ class App extends Component {
         return (
             <div className="App">
                 <Header/>
+                <div className="container">
+                    <MainChatScreen />
+                </div>
             </div>
         );
     }
