@@ -3,15 +3,13 @@
  */
 import React, {Component} from 'react';
 import {observer, inject} from 'mobx-react';
-import $ from 'jquery';
-import { findDOMNode } from 'react-dom';
 
 @inject('store') @observer
 class CustomerInfo extends Component {
     constructor(props) {
         super(props);
         this.store = this.props.store;
-        this.customer = this.store.customer != undefined ? this.store.customer : {};
+        this.customer = this.store.customer !== undefined ? this.store.customer : {};
     }
 
     render() {
@@ -44,7 +42,7 @@ class CustomerInfo extends Component {
                                         </tbody>
                                     </table>
 
-                                    <a href="#" className="btn btn-primary" style={{marginRight: '10px'}}>More information</a>
+                                    <a href="" className="btn btn-primary" style={{marginRight: '10px'}}>More information</a>
                                 </div>
                             </div>
                         </div>

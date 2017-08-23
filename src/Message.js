@@ -6,10 +6,6 @@ import {observer} from 'mobx-react';
 
 @observer
 export default class Message extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         if (this.props.from === 'we')
             return (
@@ -21,7 +17,7 @@ export default class Message extends Component {
                         </div>
                     </div>
                     <div className="col-md-2 col-xs-2 avatar">
-                        <img
+                        <img alt="avatar"
                             src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg"
                             className=" img-responsive "/>
                     </div>
@@ -31,7 +27,7 @@ export default class Message extends Component {
             return (
                 <div className="row msg_container base_receive">
                     <div className="col-md-2 col-xs-2 avatar">
-                        <img
+                        <img alt="avatar"
                             src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg"
                             className=" img-responsive "/>
                     </div>

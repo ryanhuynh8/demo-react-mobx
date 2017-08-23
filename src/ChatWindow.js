@@ -73,9 +73,9 @@ class ChatWindow extends Component {
                                     className="glyphicon glyphicon-comment"></span> Chat - {this.props.user}</h3>
                             </div>
                             <div className="col-md-4 col-xs-4" style={{"text-align": "right"}}>
-                                <a href="#" onClick={() => this.minimizeClick()}><span id="minim_chat_window"
+                                <a href="" onClick={() => this.minimizeClick()}><span id="minim_chat_window"
                                                                                        className="glyphicon glyphicon-minus icon_minim"></span></a>
-                                <a href="#"><span className="glyphicon glyphicon-remove icon_close"
+                                <a href=""><span className="glyphicon glyphicon-remove icon_close"
                                                   data-id="chat_window_1"></span></a>
                             </div>
                         </div>
