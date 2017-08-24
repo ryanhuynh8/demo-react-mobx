@@ -29,10 +29,50 @@ const cases = [
     }
 ];
 
+const messages = [
+    {
+        name: 'Đức Duy',
+        text: 'Bên em đã nhận yêu cầu, hẹn anh ngày mai giải quyết nhé.',
+        timestamp: '10:29 AM',
+        requestId: '12985',
+        direction: 'right'
+    },
+    {
+        name: 'Huỳnh Đức Anh Huy',
+        text: 'Làm ăn lâu lắc quá mai tui lên đốt cái VNG à.',
+        timestamp: '10:29 AM',
+        requestId: '12985',
+        direction: 'left'
+    },
+    {
+        name: 'Đức Duy',
+        text: 'Sir yes sir!',
+        timestamp: '10:29 AM',
+        requestId: '12985',
+        direction: 'right'
+    },
+    {
+        name: 'Đức Duy',
+        text: 'Sir yes sir!',
+        timestamp: '10:29 AM',
+        requestId: '12985',
+        direction: 'right'
+    },
+    {
+        name: 'Huỳnh Đức Anh Huy',
+        text: 'Hihihehe',
+        timestamp: '10:29 AM',
+        requestId: '12985',
+        direction: 'left'
+    }
+];
+
 class AppStore {
     @observable messages = [] ;
     @observable message = '';
     @observable customer = {};
+    @observable showSuggestList = false;
+
     url = 'https://conversejs.org/http-bind/';
 
     senderId = null;
@@ -46,6 +86,7 @@ class AppStore {
         // this.connection.rawInput = data => console.log('Sent: ' + data);
         console.log('Initializing connection...');
         this.cases = cases;
+        this.messages = messages;
     }
 
     onConnect(status)

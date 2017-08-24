@@ -20,6 +20,8 @@ class ChatPanel extends Component {
             { this.cases.map( (item, index) => {
                 return <CaseInfoPanel data={item} key={index} />
             })}
+
+
         </div>
     }
 }
