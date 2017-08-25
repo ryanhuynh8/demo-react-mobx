@@ -1,4 +1,4 @@
-import {observable} from 'mobx'
+import {observable, action} from 'mobx'
 import axios from 'axios';
 var Strophe = window.Strophe;
 
@@ -67,11 +67,18 @@ const messages = [
     }
 ];
 
+const agents = [
+    {
+        name: 'Huỳnh Đức Anh Huy'
+    }
+];
 class AppStore {
     @observable messages = [] ;
     @observable message = '';
     @observable customer = {};
     @observable showSuggestList = false;
+    @observable currentAgentList = [];
+    @observable activeTab = 'info';
 
     url = 'https://conversejs.org/http-bind/';
 
@@ -87,6 +94,7 @@ class AppStore {
         console.log('Initializing connection...');
         this.cases = cases;
         this.messages = messages;
+        this.currentAgentList = agents;
     }
 
     onConnect(status)
@@ -170,6 +178,18 @@ class AppStore {
         axios.get(`https://foobar123.getsandbox.com/user/${id}`).then(customer => {
             self.customer = customer.data;
         });
+    }
+
+    @action addAgentToList(name) {
+        this.currentAgentList.push({name: name});
+    }
+
+    @action removeAgent(agent) {
+        this.currentAgentList = this.currentAgentList.filter(item => item.name !== agent.name);
+    }
+
+    @action setActiveTab(tab) {
+        this.activeTab = tab;
     }
 }
 

@@ -7,12 +7,13 @@ import Message from './Message'
 
 @inject('store') @observer
 class CaseInfoPanel extends Component {
-    inputMessage = '';
+
 
     constructor(props) {
         super(props);
         this.messages = this.props.store.messages;
-
+        console.log(this.state);
+        this.state = { inputMessage: '123' };
         switch (props.data.status) {
             case 'pending':
                 this.statusIcon = <i className="fa fa-circle" style={{color: `red`}} aria-hidden="true" />;
@@ -43,22 +44,18 @@ class CaseInfoPanel extends Component {
 
     renderAgentList() {
         if (this.props.data.status !== 'done') return null;
+        const agentList = this.props.store.currentAgentList;
+
         return <div className="box-agent-list">
-                <span className="agent-name">
-                    <img className="avatar-img rounded-circle agent-avatar" src="/images/20046343_1609547959078623_9204659631358074576_n.jpg"/>
-                    &nbsp; Dõan Văn Điều &nbsp;
-                    <i className="fa fa-times-circle" aria-hidden="true"/>
-                </span>
-                <span className="agent-name">
-                    <img className="avatar-img rounded-circle agent-avatar" src="/images/20046343_1609547959078623_9204659631358074576_n.jpg"/>
-                    &nbsp;	Nguyễn Khánh Bằng &nbsp;
-                    <i className="fa fa-times-circle" aria-hidden="true"/>
-                </span>
-                <span className="agent-name">
-                    <img className="avatar-img rounded-circle agent-avatar" src="/images/20046343_1609547959078623_9204659631358074576_n.jpg"/>
-                    &nbsp;	 Nguyễn Gia Bảo &nbsp;
-                    <i className="fa fa-times-circle" aria-hidden="true"/>
-                </span>
+            { agentList.map( (agent, index) => {
+                return (
+                    <span className="agent-name" key={index}>
+                        <img className="avatar-img rounded-circle agent-avatar" src="/images/20046343_1609547959078623_9204659631358074576_n.jpg"/>
+                        &nbsp; { agent.name } &nbsp;
+                        <i className="fa fa-times-circle" aria-hidden="true" onClick={() => this.props.store.removeAgent(agent)} />
+                    </span>
+                )
+            })}
             </div>
     }
 
@@ -66,7 +63,7 @@ class CaseInfoPanel extends Component {
         if (this.props.data.status !== 'done') return null;
         return (
             <div className="box-info box-chat-input">
-                <textarea className="chat-input" rows="5" placeholder="Nội dung tin nhắn..." value={this.inputMessage} onChange={(e) => this.inputChangeHandler(e)}></textarea>
+                <textarea className="chat-input" rows="5" placeholder="Nội dung tin nhắn..." value={this.state.inputMessage} onChange={(e) => this.inputChangeHandler(e)}></textarea>
                 <i className="fa fa-smile-o" aria-hidden="true" />
                 <i className="fa fa-paperclip" aria-hidden="true" />
                 <i className="fa fa-picture-o" aria-hidden="true" />
@@ -81,29 +78,39 @@ class CaseInfoPanel extends Component {
         if (this.props.store.showSuggestList) {
             return <div className="box-info box-agent-suggest-list">
                 <span style={{fontWeight:`bold`, fontSize: `14px`}}>Thêm người hỗ trợ</span>
-                <div className="suggest-agent-name">
+                <div className="suggest-agent-name" onClick={() => this.suggestAgentClicked('Nguyễn Khánh Bằng')}>
                     <img className="avatar-img rounded-circle agent-avatar"
                          src="/images/20046343_1609547959078623_9204659631358074576_n.jpg"/>
-                    Huy Huynh
+                    Nguyễn Khánh Bằng
                 </div>
-                <div className="suggest-agent-name">
+                <div className="suggest-agent-name" onClick={() => this.suggestAgentClicked('Dõan Văn Điều')}>
                     <img className="avatar-img rounded-circle agent-avatar"
                          src="/images/20046343_1609547959078623_9204659631358074576_n.jpg"/>
-                    Dieu Doan
+                    Dõan Văn Điều
                 </div>
-                <div className="suggest-agent-name">
+                <div className="suggest-agent-name" onClick={() => this.suggestAgentClicked('Nguyễn Gia Bảo')}>
                     <img className="avatar-img rounded-circle agent-avatar"
                          src="/images/20046343_1609547959078623_9204659631358074576_n.jpg"/>
-                    Bao Gia
+                    Nguyễn Gia Bảo
                 </div>
             </div>
         }
         return null;
     }
 
-    inputChangeHandler(e) {
-        console.log(this);
+    suggestAgentClicked(name) {
+        this.props.store.addAgentToList(name);
+        this.props.store.showSuggestList = false;
+        this.setState({inputMessage: this.state.inputMessage.slice(0, this.state.inputMessage.length - 1)});
     }
+
+    inputChangeHandler(e) {
+        if (e.target.value[e.target.value.length - 1] === '@') {
+            this.props.store.showSuggestList = true;
+        } else this.props.store.showSuggestList = false;
+        this.setState({inputMessage: e.target.value});
+    }
+
     render() {
         return (
             <div className="box-info box-case-info">

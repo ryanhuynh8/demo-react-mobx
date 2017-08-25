@@ -3,7 +3,7 @@
  */
 import React, {Component} from 'react'
 import Badge from './pure/Badge'
-import CustomerNameHeader from './pure/CustomerNameHeader'
+import CustomerNameHeader from './CustomerNameHeader'
 
 class Header extends Component {
     render() {

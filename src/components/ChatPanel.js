@@ -15,12 +15,12 @@ class ChatPanel extends Component {
     }
 
     render() {
-        return <div className="col-8">
+        return <div className="col-12 col-sm-12 col-md-8">
             <TinyPanel text="Xem trước đó" />
+
             { this.cases.map( (item, index) => {
                 return <CaseInfoPanel data={item} key={index} />
             })}
-
 
         </div>
     }
