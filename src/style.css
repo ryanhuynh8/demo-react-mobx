@@ -681,6 +681,19 @@ input:not([type=search]), select {
     -webkit-transition: all 0.3s;
     transition: all 0.3s; }
 
+.button-small {
+    padding: .25rem .55rem !important;
+    font-size: .875rem !important;
+    line-height: 1.5 !important;
+}
+
+.edit-field button {
+    display: block !important;
+    flex: 0 0 auto;
+    margin-right: 5px;
+}
+
+
 .case-status {
     font-weight: 600;
     font-style: italic;

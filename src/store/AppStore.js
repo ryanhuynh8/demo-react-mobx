@@ -78,7 +78,7 @@ class AppStore {
     @observable customer = {};
     @observable showSuggestList = false;
     @observable currentAgentList = [];
-    @observable activeTab = 'info';
+    @observable activeTab = 'case';
 
     url = 'https://conversejs.org/http-bind/';
 
