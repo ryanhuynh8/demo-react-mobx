@@ -4,7 +4,11 @@
 import React, {Component} from 'react'
 import EditableInput from './pure/EditableInput'
 
-    class CaseDialog extends Component {
+class CaseDialog extends Component {
+    updateInputBox(value) {
+        console.log(value);
+    }
+
     render() {
         return <div className="col-12 col-md-4 col-sm-12 p-0">
             <div className="box-white">
@@ -27,33 +31,10 @@ import EditableInput from './pure/EditableInput'
 
                 <h5 className="fs-18 fw-600 mt-4">Thông tin yêu cầu 80333</h5>
                 <ul className="list-unstyled list-info-in-case">
-                    <li>
-                        <EditableInput label="Họ tên" value="Nguyễn Khánh Băng"/>
-                    </li>
-                    <li>
-                        <label>Điện thoại</label>
-                        <br/>
-                        <span>+84 901245684</span>
-                        <span className="action-info">
-                                    <i className="fa fa-pencil" aria-hidden="true"></i>
-                                </span>
-                    </li>
-                    <li>
-                        <label>Email</label>
-                        <br/>
-                        <span>bangnk1985@gmail.com</span>
-                        <span className="action-info">
-                                    <i className="fa fa-pencil" aria-hidden="true"></i>
-                                </span>
-                    </li>
-                    <li>
-                        <label>Tài khoản</label>
-                        <br/>
-                        <span>bangnk1985</span>
-                        <span className="action-info">
-                                    <i className="fa fa-pencil" aria-hidden="true"></i>
-                                </span>
-                    </li>
+                    <EditableInput label="Họ tên" value="Nguyễn Khánh Băng" saveHandler={(value) => this.updateInputBox(value)} />
+                    <EditableInput label="Điện thoại" value="+84 901245684" saveHandler={(value) => this.updateInputBox(value)} />
+                    <EditableInput label="Email" value="bangnk1985@gmail.com" saveHandler={(value) => this.updateInputBox(value)} />
+                    <EditableInput label="Tài khoản" value="bangnk1985" saveHandler={(value) => this.updateInputBox(value)} />
                     <li>
                         <label>Loại yêu cầu</label>
                         <br/>
