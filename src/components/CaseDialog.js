@@ -35,22 +35,8 @@ class CaseDialog extends Component {
                     <EditableInput label="Điện thoại" value="+84 901245684" saveHandler={(value) => this.updateInputBox(value)} />
                     <EditableInput label="Email" value="bangnk1985@gmail.com" saveHandler={(value) => this.updateInputBox(value)} />
                     <EditableInput label="Tài khoản" value="bangnk1985" saveHandler={(value) => this.updateInputBox(value)} />
-                    <li>
-                        <label>Loại yêu cầu</label>
-                        <br/>
-                        <span>Báo lỗi, khiếu kiện</span>
-                        <span className="action-info">
-                                    <i className="fa fa-pencil" aria-hidden="true"></i>
-                                </span>
-                    </li>
-                    <li>
-                        <label>Sản phẩm</label>
-                        <br/>
-                        <span>Gunny Mobile</span>
-                        <span className="action-info">
-                                    <i className="fa fa-pencil" aria-hidden="true"></i>
-                                </span>
-                    </li>
+                    <EditableInput label="Loại yêu cầu" value="Báo lỗi, khiếu kiện" saveHandler={(value) => this.updateInputBox(value)} />
+                    <EditableInput label="Sản phẩm" value="Gunny Mobile" saveHandler={(value) => this.updateInputBox(value)} />
                     <li>
                         <label>Nội dung</label>
                         <br/>
